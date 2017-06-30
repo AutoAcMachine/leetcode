@@ -1,0 +1,15 @@
+class Solution {
+public:
+    double myPow(double x, int n) {
+        double res=1;bool fg=0;
+        long long p=n;
+        if(p<0)fg=1,p*=-1;
+        while(p){
+            if(p&1)res*=x;
+            p=p>>1;
+      		x*=x;
+        }
+        if(fg)return 1.0/res;
+        return res;
+    }
+};
