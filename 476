@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        
+        int p=ceil(log2(num));
+        
+        int res=0;
+        
+        for(int i=0;i<p;i++){
+            res+=(num&(1<<i))?0:(1<<i);
+        }
+        return res;
+    }
+};
