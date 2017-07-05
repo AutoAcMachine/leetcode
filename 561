@@ -1,11 +1,21 @@
 class Solution {
 public:
     int arrayPairSum(vector<int>& nums) {
-        sort(nums.begin(),nums.end());
+        int Hash[20005]={0};
+		int len=nums.size();
+        for(int i=0;i<len;i++)
+			Hash[nums[i]+10000]++;
         
         long long res=0;
-        int len=nums.size();
-        for(int i=0;i<len;i+=2)res+=nums[i];
+        int ok=1;
+        for(int i=0;i<=20000;i++){
+			if(!Hash[i])continue;
+            res+=(long long)(i-10000)*(Hash[i]/2);
+            if(Hash[i]&1){
+				if(ok)res+=i-10000;
+				ok^=1;
+			}
+        }
         return res;
     }
-};
+}p;
