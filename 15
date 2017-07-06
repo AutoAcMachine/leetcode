@@ -1,0 +1,29 @@
+class Solution {
+public:
+	#define pb push_back
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>>res;
+		
+		sort(nums.begin(),nums.end());
+		
+		int len=nums.size();
+		
+		for(int i=0;i<len;i++){
+			int l=i+1,r=len-1;
+			int val=-nums[i];
+			while(l<r){
+				if(nums[l]+nums[r]==val){
+					res.pb(vector<int>{nums[i],nums[l],nums[r]});
+					l++;
+				}
+				else if(nums[l]+nums[r]<val)
+					l++;
+				else
+					r--;
+			}
+            while(i+1<len&&nums[i+1]==nums[i])i++;
+		}
+		res.erase(unique(res.begin(),res.end()),res.end());
+		return res;
+    }
+}p;
