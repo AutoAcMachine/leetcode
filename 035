@@ -1,0 +1,21 @@
+class Solution {
+public:
+    
+    //find the first bigger than or equal to target number
+    int searchInsert(vector<int>& nums, int target) {
+        nums.push_back(INT_MAX);
+        int l=0,r=nums.size()-1,res=0;
+        
+        while(l<=r){
+            int mid=(l+r)>>1;
+            if(nums[mid]>=target){
+                res=mid;
+                r=mid-1;
+            }     
+            else
+                l=mid+1;
+        }
+    
+        return res;
+    }
+};
