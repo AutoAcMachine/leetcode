@@ -1,0 +1,29 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    #define pb push_back
+    
+    void dfs(vi& nums,vi& path,vector<vi>& ans,int r,int target){
+        if(!target){
+            ans.pb(path);
+            return ;
+        }
+        if(nums[0]>target)return ;
+        for(int i=r;i>=0;i--){
+            if(nums[i]>target)continue;
+            path.pb(nums[i]);
+            dfs(nums,path,ans,i,target-nums[i]);
+            path.pop_back();
+        }
+    }
+    
+    
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+         sort(candidates.begin(),candidates.end());
+        
+        vector<vi> res;
+        vi path;
+        dfs(candidates,path,res,candidates.size()-1,target);
+        return res;
+    }
+};
