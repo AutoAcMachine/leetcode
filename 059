@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>> res(n,vector<int>(n,0));
+        if(n==0)return res;
+        int tot=1,x=0,y=0;
+        res[x][y]=1;
+        while(tot<n*n){
+            while(y+1<n&&!res[x][y+1])res[x][++y]=++tot;
+            while(x+1<n&&!res[x+1][y])res[++x][y]=++tot;
+            while(y>0&&!res[x][y-1])res[x][--y]=++tot;
+            while(x>0&&!res[x-1][y])res[--x][y]=++tot;
+        }
+        
+        return res;
+    }
+};
