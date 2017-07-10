@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& g) {
+        int n=g.size(),m=g[0].size();
+        vector<vector<int>>res(n+1,vector<int>(m+1,0));
+        res[0][1]=1;
+        
+        for(int i=1;i<=n;i++)
+            for(int j=1;j<=m;j++)
+                if(g[i-1][j-1])
+                    continue;
+                else
+                    res[i][j]=res[i-1][j]+res[i][j-1];
+        return res[n][m];
+    }
+};
