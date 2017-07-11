@@ -1,0 +1,21 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    #define pb push_back
+    void dfs(vector<vi>& res,vi& path,int s,int k,int n){
+        if(k==0&&n==0){res.pb(path);return ;}
+        if(s*k>n)return ;
+        for(int i=s;i<=9&&i<=n;i++){
+            path.pb(i);
+            dfs(res,path,i+1,k-1,n-i);
+            path.pop_back();
+        }
+    }
+    
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vi> res;
+        vi path;
+        dfs(res,path,1,k,n);
+        return res;
+    }
+};
