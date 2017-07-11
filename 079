@@ -1,0 +1,36 @@
+class Solution {
+public:
+    int n,m,len;
+    const int dx[4]={0,0,1,-1};
+    const int dy[4]={1,-1,0,0};
+    typedef vector<vector<char>> vc;
+    bool dfs(vc& g,int x,int y,string& s,int l){
+        if(l==len)return true;
+        for(int i=0;i<4;i++){
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(nx<0||nx>=n||ny<0||ny>=m)continue;
+            if(g[nx][ny]==s[l]){
+                char c=g[nx][ny];g[nx][ny]='\0';
+                if(dfs(g,nx,ny,s,l+1))return true;
+                g[nx][ny]=c;
+            }
+        }
+        return false;
+    }
+    
+    bool exist(vector<vector<char>>& board, string word) {
+        n=board.size();m=board[0].size();
+        len=word.length();
+        
+        for(int i=0;i<n;i++)
+            for(int j=0;j<m;j++){
+                if(board[i][j]!=word[0])continue;
+                char c=board[i][j];
+                board[i][j]='\0';
+                if(dfs(board,i,j,word,1))return true;
+                board[i][j]=c;
+            }
+        return false;
+    }
+};
