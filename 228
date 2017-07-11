@@ -1,0 +1,35 @@
+class Solution {
+public:
+    
+    string solve(int l){
+        stringstream in;
+        string s;
+        in<<l;
+        in>>s;
+        return s; 
+    }
+    
+    vector<string> summaryRanges(vector<int>& nums) {
+        vector<string> res;
+        if(nums.size()==0)return res;
+        int l,r;l=r=nums[0];
+        
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]==r+1){
+                r++;
+            }
+            else{
+                if(l!=r)
+                    res.push_back(solve(l)+"->"+solve(r));
+                else
+                    res.push_back(solve(l));
+                l=r=nums[i];
+            }
+        }
+        if(l!=r)
+            res.push_back(solve(l)+"->"+solve(r));
+        else
+            res.push_back(solve(l));
+        return res;
+    }
+};
