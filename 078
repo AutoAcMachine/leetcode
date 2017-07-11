@@ -1,0 +1,23 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    #define pb push_back
+    void dfs(vector<vi>& res,vi& nums,int l,int r,vi& tmp){
+        if(l==r){
+            res.pb(tmp);
+            return ;
+        }
+        dfs(res,nums,l+1,r,tmp);
+        tmp.pb(nums[l]);
+        dfs(res,nums,l+1,r,tmp);
+        tmp.pop_back();
+    }
+    
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vi>res;
+        vi tmp;
+        int n=nums.size();
+        dfs(res,nums,0,n,tmp);
+        return res;
+    }
+};
