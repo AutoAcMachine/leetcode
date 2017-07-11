@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int minimumTotal(vector<vector<int>>& nums) {
+        if(nums.empty())return 0;
+        int n=nums.size(),m=nums[0].size();
+        for(int i=n-2;i>=0;i--)
+            for(int j=0;j<=i;j++)
+                nums[i][j]+=min(nums[i+1][j],nums[i+1][j+1]);
+        return nums[0][0];
+    }
+};
