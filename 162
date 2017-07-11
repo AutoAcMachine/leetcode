@@ -1,0 +1,10 @@
+class Solution {
+public:
+    //多个峰，为啥二分？
+    int findPeakElement(vector<int>& nums) {
+        for(int i=1;i<nums.size()-1;i++)
+            if(nums[i]>nums[i-1]&&nums[i]>nums[i+1])
+                return i;
+        return nums[0]>nums.back()?0:nums.size()-1;
+    }
+};
