@@ -1,0 +1,13 @@
+class Solution {
+public:
+    //n小，随便水水
+    int climbStairs(int n) {
+        if(n<=1)return 1;
+        int a=1,b=1;
+        while(n--){
+            b=a+b;
+            a=b-a;
+        }
+        return a;
+    }
+};
