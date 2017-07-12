@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    typedef vector<TreeNode*> vt;
+    #define pb push_back
+    vt solve(int l,int r){
+        vt res;
+        if(l>r)
+            return {nullptr};
+        if(l==r)
+            return {new TreeNode(l)};
+        vt ll,rr;
+        for(int i=l;i<=r;i++){
+            ll=solve(l,i-1);
+            rr=solve(i+1,r);
+            
+            for(auto x:ll)
+                for(auto y:rr){
+                    TreeNode* rt=new TreeNode(i);
+                    rt->left=x;
+                    rt->right=y;
+                    res.pb(rt);
+                }
+            
+        }
+        return res;
+    }
+    
+    vector<TreeNode*> generateTrees(int n) {
+        if(n==0)return {};
+        return solve(1,n);
+    }
+};
