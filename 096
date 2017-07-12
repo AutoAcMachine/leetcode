@@ -1,0 +1,13 @@
+class Solution {
+public:
+    //卡特兰数
+    //C(2n,n)/n+1
+    typedef long long ll;
+    int numTrees(int n) {
+        ll res=1;
+        
+        for(int i=1;i<=n;i++)
+            res=res*(n*2-i+1)/i;
+        return res/(n+1);
+    }
+};
