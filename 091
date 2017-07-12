@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int numDecodings(string s) {
+        int n=s.length();
+        if(n==0||s[0]=='0')return 0;
+        
+        int f1=1,f2=1;
+        for(int i=1;i<n;i++){
+            int tmp=f1;
+            if(ok(s[i])){
+                if(ok(s[i-1],s[i]))
+                    f1+=f2;
+            }
+            else{
+                if(ok(s[i-1],s[i]))
+                    f1=f2;
+                else 
+                    return 0;
+            }
+            f2=tmp;
+        }
+        return f1;
+    }
+    bool ok(char c){return c!='0';}
+    bool ok(char a,char b){return a=='1'||a=='2'&&b<='6';}
+};
