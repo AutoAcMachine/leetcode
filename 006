@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if(numRows==1)return s;
+        
+        string str[numRows];
+        
+        int step=1,cur=0,len=s.length();
+        
+        for(int i=0;i<len;i++){
+            str[cur]+=(s[i]);
+            cur+=step;
+            if(cur==0)step=1;
+            if(cur==numRows-1)step=-1;
+        }
+        s.clear();
+        for(int i=0;i<numRows;i++)s=s+str[i];
+        return s;
+    }
+};
