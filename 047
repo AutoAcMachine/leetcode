@@ -1,0 +1,54 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    #define pb push_back
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vi> res;
+        sort(nums.begin(),nums.end());
+        vector<int> tmp(nums);
+        int n=nums.size();
+            
+        do{
+            res.pb(tmp);
+            //next_permutation
+            int j=n-1;
+            nextPermutation(tmp);
+        }while(tmp!=nums);
+        return res;   
+    }
+    
+    void sort_lr(int l,int r,vector<int>&nums){
+        int mid=(l+r)/2;
+        for(int i=l;i<=mid;i++)
+            swap(nums[i],nums[r+l-i]);
+    }
+    
+    void nextPermutation(vector<int>& nums) {
+        int len=nums.size();
+        
+        int r=len-1;
+        
+        while(r){
+            if(nums[r-1]<nums[r])
+                break;
+            r--;
+        }
+        
+        if(r==0){
+            sort_lr(0,len-1,nums);
+            return ;
+        }
+        int l=len-1;
+        int val=nums[r-1];
+        while(l>=r){
+            if(nums[l]>val)
+                break;
+            l--;
+        }
+        
+        swap(nums[r-1],nums[l]);
+
+        sort_lr(r,len-1,nums);
+    }
+        
+};
