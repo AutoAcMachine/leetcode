@@ -1,0 +1,36 @@
+class Solution {
+public:
+    typedef long long ll;
+    int divide(int dividend, int divisor) {
+        ll res=mul(dividend,divisor);
+        if(res<INT_MIN||res>INT_MAX)
+           return INT_MAX;
+        return res; 
+    }
+    ll mul(ll a,ll b){
+        if(a==0||b==0)return 0;   
+        int sgn=((a<0)^(b<0))?-1:1;
+        ll res=0;
+        a=abs(a);b=abs(b);
+        while(a>b){
+            int shift=0;
+            ll part=1;
+            while(a>(b<<shift)){
+                part<<=1;
+                shift++;
+            }
+            if(a==(b<<shift)){
+                res+=part;
+                break;
+            }
+            else{
+                part>>=1;
+                shift--;
+            }
+            res+=part;
+            a-=(b<<shift);
+        }
+        if(a==b)res++;
+        return res*sgn;
+    }
+};
