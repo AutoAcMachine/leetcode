@@ -1,0 +1,35 @@
+class Solution {
+public:
+    /*
+        题意比较难理解，大致就是
+        n=1 1
+        n=2 上面有一个1，11
+        n=3 上面有2个1  21
+        n=4 1个2一个1   1211
+        n=5 1个1 1个2 2个1  111221
+        明白了题意，递归就行了
+    
+    */
+    string countAndSay(int n) {
+        if(n==1)
+            return "1";
+        
+        string s=countAndSay(n-1);
+        string res="";
+        int cnt=1;char last=s[0];
+        
+        int len=s.length();
+        
+        for(int i=1;i<len;i++){
+            if(s[i]!=last){
+                res=res+to_string(cnt)+last;
+                cnt=1;last=s[i];
+                continue;
+            }
+            cnt++;
+        }
+        res=res+to_string(cnt)+last;
+        
+        return res;
+    }
+};
