@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    //有可能相邻的两个节点值交换了，纠正过来
+
+    TreeNode*x=nullptr,*y=nullptr,*pre=new TreeNode(INT_MIN);
+    void solve(TreeNode *rt){
+        if(!rt)return ;
+        solve(rt->left);
+        if(x==nullptr&&pre->val>=rt->val)x=pre;
+        if(x!=nullptr&&pre->val>=rt->val)y=rt;
+        pre=rt;
+        solve(rt->right);
+    }
+    void recoverTree(TreeNode* root) {
+        solve(root);
+        swap(x->val,y->val);
+    }
+    
+};
