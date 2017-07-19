@@ -1,0 +1,24 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    #define pb push_back
+    void dfs(int n,int k,vector<vi> &res,vi& tmp){
+        if(n<k)return ;
+        if(k==0){
+            res.pb(tmp);
+            return ;
+        }
+        for(int i=n;i>0;i--){
+            tmp.pb(i);
+            dfs(i-1,k-1,res,tmp);
+            tmp.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combine(int n, int k) {
+        vector<vi> res;
+        vi tmp;
+        dfs(n,k,res,tmp);
+        return res;
+    }
+};
