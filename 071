@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        string res,tmp;
+        vector<string> st;
+        stringstream s(path);
+        
+        while(getline(s,tmp,'/')){
+            if(tmp==""||tmp==".")continue;
+            else if(tmp==".."&&!st.empty())st.pop_back();
+            else if(tmp!="..")st.push_back(tmp);
+        }
+        for(auto ss: st)res+="/"+ss;
+        return res.empty()?"/":res;
+    }
+};
