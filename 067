@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int n=a.length(),m=b.length();
+        vector<int> res(max(n,m)+1,0);
+        int sgn=0,cnt=0;
+        while(m||n){
+            if(m){
+                m--;   
+                sgn+=b[m]-'0';
+            }
+            if(n){
+                n--;
+                sgn+=a[n]-'0';
+            }
+            res[cnt++]=sgn%2;
+            sgn/=2;
+        }
+        if(sgn)res[cnt++]=sgn;
+        string s(cnt,'0');
+        for(int i=0;i<cnt;i++){
+            s[i]+=res[cnt-i-1];
+        }
+        return s;
+    }
+};
