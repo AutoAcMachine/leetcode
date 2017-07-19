@@ -1,0 +1,17 @@
+class Solution {
+public:
+    //二分或牛顿迭代
+    //精度不要选太高
+    double get(double a,int b){
+        return a*a-b;
+    }
+    int mySqrt(int x) {
+        double n=5;
+        const double esp=1e-5;
+        
+        while(fabs(get(n,x))>esp){
+            n-=get(n,x)/(n*2);
+        }
+        return floor(n);
+    }
+};
