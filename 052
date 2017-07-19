@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int totalNQueens(int n) {
+        int res=0;
+        vector<vector<int>> vis(3,vector<int>(n*2,0));
+        vector<int> c(n,0);
+        dfs(0,n,c,vis,res);
+        return res;
+    }
+    void dfs(int cur,int& n,vector<int>& c,vector<vector<int>>& vis,int& res){
+        if(cur==n){
+            res++;
+            return ;
+        }
+        for(int i=0;i<n;i++)
+            if(!vis[0][i]&&!vis[1][cur+i]&&!vis[2][cur-i+n]){
+               c[cur]=i;
+               vis[0][i]=vis[1][cur+i]=vis[2][cur-i+n]=1;
+                dfs(cur+1,n,c,vis,res);
+               vis[0][i]=vis[1][cur+i]=vis[2][cur-i+n]=0;
+            }
+    }
+};
