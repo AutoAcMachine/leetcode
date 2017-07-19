@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool ok(char c){
+        if(c>='a'&&c<='z')return true;
+        if(c>='A'&&c<='Z')return true;
+        return false;
+    }
+    int lengthOfLastWord(string s) {
+        int n=s.length();
+        int r=n;
+        while(r>0&&!ok(s[r-1]))r--;
+        int cnt=r;
+        while(r>0&&ok(s[r-1]))r--;
+        return cnt-r;
+    }
+};
