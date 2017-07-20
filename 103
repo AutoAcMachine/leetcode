@@ -1,0 +1,28 @@
+class Solution {
+public:
+    //层次遍历
+    typedef vector<int> vi;
+    typedef pair<TreeNode*,int> pr;
+    #define pb push_back
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vi> res;
+        if(!root)return res;
+        queue<pr> q;
+        q.push({root,0});
+        while(!q.empty()){
+            root=q.front().first;
+            int d=q.front().second;
+            q.pop();
+            if(res.size()<=d)res.pb({});
+            res[d].pb(root->val);
+            if(root->left)q.push({root->left,d+1});
+            if(root->right)q.push({root->right,d+1});
+        }
+        for(int i=1;i<res.size();i+=2){
+            int n=res[i].size();
+            for(int j=0;j<n/2;j++)
+                swap(res[i][j],res[i][n-j-1]);
+        }
+        return res;
+    }
+};
