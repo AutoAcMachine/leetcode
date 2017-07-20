@@ -1,0 +1,16 @@
+class Solution {
+public:
+    //hash
+    int subarraySum(vector<int>& nums, int k) {
+        int res=0,n=nums.size(),cnt=0;
+        map<int,int> vis;
+        vis[0]=1;
+        
+        for(int i=0;i<n;i++){
+            cnt+=nums[i];
+            res+=vis[cnt-k];
+            vis[cnt]++;
+        }
+        return res;
+    }
+};
