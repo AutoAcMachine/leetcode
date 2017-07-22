@@ -1,0 +1,18 @@
+class Solution {
+public:
+    //sum<=20000 
+    //01规划，O(n*sum)
+    bool canPartition(vector<int>& nums) {
+        int sum=0;
+        for(auto val:nums)sum+=val;
+        if(sum&1)return false;
+        sum>>=1;
+        bitset<10005> dp;
+        dp[0]=true;
+        
+        for(auto val:nums)
+            for(int i=sum;i>=val;i--)
+                dp[i]=dp[i]||dp[i-val];
+        return dp[sum];
+    }
+};
