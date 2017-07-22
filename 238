@@ -1,0 +1,20 @@
+class Solution {
+public:
+    //是增序的
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n=nums.size();
+        vector<int> res(n,1);
+        
+        int pre=1,last=1;
+        
+        for(int i=0;i<n;i++){
+            res[i]*=pre;
+            res[n-i-1]*=last;
+            pre*=nums[i];
+            last*=nums[n-i-1];
+        }
+        
+        
+        return res;
+    }
+};
