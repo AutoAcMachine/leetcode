@@ -1,0 +1,26 @@
+class Solution {
+public:
+    //长度>=3的等差数列子序列的个数
+    //map find效率这么差？
+    int numberOfArithmeticSlices(vector<int>& A) {
+        typedef long long ll;
+        int n=A.size();
+        if(n<3)return 0;
+        int res=0;
+        vector<unordered_map<ll,int>> dp(n);
+        for(int i=1;i<n;i++)
+            for(int j=i-1;j>=0;j--){
+                ll dis=(ll)A[i]-A[j];
+                if(dp[i].find(dis)==dp[i].end())
+                    dp[i].insert(make_pair(dis,1));
+                else
+                    dp[i][dis]++;
+                if(dp[j].find(dis)!=dp[j].end()){
+                    dp[i][dis]+=dp[j][dis];
+                    res+=dp[j][dis];
+                }
+            }
+        
+        return res;
+    }
+};
