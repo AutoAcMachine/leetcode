@@ -1,0 +1,21 @@
+class Solution {
+public:
+    //考虑两个字符串，谁在前谁在后
+    //那么只要考虑s1+s2 s2+s1谁大就好了
+    string largestNumber(vector<int>& nums) {
+        int n=nums.size();
+        vector<string> tmp(n);
+        string res("");
+        for(int i=0;i<n;i++)
+            tmp[i]=to_string(nums[i]);
+        
+        sort(tmp.begin(),tmp.end(),[](string& s1,string& s2){return s1+s2>s2+s1;});
+        
+        for(auto c:tmp)
+            res=res+c;
+        //删除前导0
+        while(res[0]=='0'&&res.size()>1)
+            res.erase(0,1);
+        return res;
+    }
+};
