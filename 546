@@ -1,0 +1,26 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    
+    void dfs(int N,int n,vi &vis,int &res){
+        if(n==0){
+            res++;
+            return ;
+        }
+        for(int i=1;i<=N;i++){
+            if(vis[i])continue;
+            if(i%n==0||n%i==0){
+                vis[i]=1;
+                dfs(N,n-1,vis,res);
+                vis[i]=0;
+            }
+        }
+    }
+    //真暴力
+    int countArrangement(int N) {
+        int res=0;
+        vi vis(N+1,0);
+        dfs(N,N,vis,res);
+        return res;
+    }
+};
