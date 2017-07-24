@@ -1,0 +1,25 @@
+class Solution {
+public:
+    typedef pair<int,int> pii;
+    #define x first
+    #define y second
+    static bool cmp(pii &a,pii &b){
+        if(a.y!=b.y)return a.y<b.y;
+        return a.x<b.x;
+    }
+    //选取最少的点，使得每个区间内都有一个点
+    int findMinArrowShots(vector<pair<int, int>>& points) {
+        int res=0;
+        sort(points.begin(),points.end(),cmp);
+        
+        int last=-1;
+        
+        for(auto t:points){
+            if(last!=-1&&t.x<=last)continue;
+            res++;    
+            last=t.y;
+        }
+        
+        return res;
+    }
+};
