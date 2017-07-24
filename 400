@@ -1,0 +1,18 @@
+class Solution {
+public:
+    //1 2 3 4 5 6 7 8 9 10 11这个序列的第n个数位是什么
+    int findNthDigit(int n) {
+
+        long long  base=9,cnt=1;
+        while(n-base*cnt>0)n-=base*cnt,base*=10,cnt++;
+        
+        long long num=1;
+        for(int i=1;i<cnt;i++)num*=10;
+        int index=(n%cnt==0?cnt:n%cnt);
+        num+=(n-1)/cnt;
+        for(int i=index;i<cnt;i++)
+            num/=10;
+        return num%10;
+        
+    }
+};
