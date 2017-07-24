@@ -1,0 +1,14 @@
+class Solution {
+public:
+    //teemo大魔王Q致盲蛮王老婆艾希
+    //给出Q的所有时间点，以及每次致盲的时间，返回总致盲时间
+    //蛮王，去打teemo啊
+    int findPoisonedDuration(vector<int>& timeSeries, int duration) {
+        int res=0,last=0;
+        for(auto v:timeSeries){
+            res+=v+duration-max(v,last);
+            last=v+duration;
+        }
+        return res;
+    }
+};
