@@ -1,0 +1,28 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    typedef pair<int,int> pii;
+    #define x first
+    #define y second
+    #define mp make_pair
+    pii dfs(TreeNode* root){
+        if(!root)return mp(0,1);
+        pii l=dfs(root->left);
+        if(!l.y)return mp(0,0);
+        pii r=dfs(root->right);
+        
+        return mp(max(l.x,r.x)+1,(r.y&&abs(l.x-r.x)<=1));
+    }
+    
+    bool isBalanced(TreeNode* root) {
+        return dfs(root).y;
+    }
+};
