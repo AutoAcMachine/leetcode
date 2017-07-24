@@ -1,0 +1,22 @@
+class Solution {
+public:
+    typedef vector<int> vi;
+    int scheduleCourse(vector<vector<int>>& courses) {
+        sort(courses.begin(),courses.end(),[](vi& a,vi& b){return a[1]<b[1];});
+        multiset<int> s;
+        int cur=0;
+        for(auto v:courses){
+            if(v[0]+cur<=v[1]){
+                s.insert(v[0]);
+                cur+=v[0];
+            }
+            else if(*s.rbegin()>v[0]){
+                cur+=v[0]-*s.rbegin();
+                s.erase(--s.end());
+                s.insert(v[0]);
+                
+            }
+        }
+        return s.size();
+    }
+};
