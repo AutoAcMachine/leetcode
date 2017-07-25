@@ -1,0 +1,26 @@
+class Solution {
+public:
+    //最大1组成的正方形
+    int maximalSquare(vector<vector<char>>& matrix) {
+        int res=0;
+        if(matrix.empty())return 0;
+        int n=matrix.size(),m=matrix[0].size();
+        vector<int> l(m,0),r(m,m-1),h(m,0);
+        
+        for(int i=0;i<n;i++){
+            for(int lmax=0,j=0;j<m;j++)
+                if(matrix[i][j]=='1'){
+                    h[j]++;
+                    if(lmax>l[j])l[j]=lmax;
+                }
+                else h[j]=0,l[j]=0,r[j]=m-1,lmax=j+1;
+            for(int rmax=m-1,j=m-1;j>=0;j--)
+                if(matrix[i][j]=='1'){
+                    if(rmax<r[j])r[j]=rmax;
+                    res=max(res,min(r[j]-l[j]+1,h[j]));
+                }
+                else rmax=j-1;
+        }
+        return res*res;
+    }
+};
