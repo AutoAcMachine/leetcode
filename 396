@@ -1,0 +1,18 @@
+class Solution {
+public:
+    typedef long long ll;
+    int maxRotateFunction(vector<int>& A) {
+        ll res=0,sum=0,n=A.size();
+        for(int i=0;i<n;i++)
+            res+=i*A[i],sum+=A[i];
+        
+        ll ans=res;
+        
+       for(int i=0;i<n;i++){
+           res-=sum;
+           res+=(ll)n*A[i];
+           ans=max(ans,res);
+       }
+        return ans;
+    }
+};
