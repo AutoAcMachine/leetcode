@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        
+        int cnt=0;
+        for(auto v:nums)cnt^=v;
+        
+        int p=0;
+        
+        for(;!(cnt&(1<<p));p++);
+        
+        int a=0,b=0;
+        p=1<<p;
+        for(auto v:nums){
+            if(v&p)a^=v;
+            else b^=v;
+        }
+        
+        
+        return {a,b};
+    }
+};
