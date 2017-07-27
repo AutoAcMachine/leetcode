@@ -1,0 +1,10 @@
+class Solution {
+public:
+    //考虑一个灯i什么时候会开着
+    //只有当因子个数为奇数的时候
+    //但是因子都是成对存在
+    //只有当i*i=p,p才不会关，所以答案，sqrt(n)
+    int bulbSwitch(int n) {
+        return sqrt(n);
+    }
+};
