@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        vector<int> res(2,0);
+        int l=sqrt(area);
+        
+        while(true){
+            if(area%l==0)
+                break;
+            l--;
+        }
+        
+        res[0]=area/l;res[1]=l;
+        return res;
+    }
+};
