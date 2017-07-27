@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        vector<string> res;
+        string ss[]={"qwertyuiopQWERTYUIOP","asdfghjklASDFGHJKL","zxcvbnmZXCVBNM"};
+        
+        map<char,int> vv;
+        int cnt=0;
+        for(auto s:ss){
+            for(auto c:s)
+                vv[c]=cnt;
+            ++cnt;
+        }
+        
+        for(auto s:words){
+            
+            set<int> st;
+            for(auto c:s){
+                st.insert(vv[c]);
+            }
+            if(st.size()==1)
+                res.push_back(s);
+            
+        }
+        
+        
+        return res;
+    }
+};
