@@ -1,0 +1,15 @@
+class Solution {
+public:
+    //就是中位数
+    //可以O(n),先求第k大，然后答案就是所有数减去k大的和
+    int minMoves2(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int res=0,l=0,r=nums.size()-1;
+        
+        while(l<r){
+            res+=nums[r]-nums[l];
+            l++;r--;
+        }
+        return res;
+    }
+};
