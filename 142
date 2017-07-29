@@ -1,0 +1,39 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    //返回链表中圈的起点
+    //分三步
+    //1.得到圈中的一个点
+    //2.得到圈的长度
+    //3.两个起点，一个先往前走圈大小的步数，另一个在表头，再以相同的速度往前走
+    ListNode *detectCycle(ListNode *head) {
+        if(!head)return head;
+        if(head->next==head)return head;
+        if(head->next==nullptr)return nullptr;
+        ListNode* fast=head,*slow=head;
+        while(fast&&fast->next){
+            slow=slow->next;
+            fast=fast->next->next;
+            if(slow==fast)break;
+        }
+        if(slow!=fast)return nullptr;
+        
+        int cnt=1;
+        
+        while(slow->next!=fast)cnt++,slow=slow->next;
+        
+        fast=slow=head;
+        
+        while(cnt--)fast=fast->next;
+        
+        while(slow!=fast)slow=slow->next,fast=fast->next;
+        return slow;
+    }
+};
