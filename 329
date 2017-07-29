@@ -1,0 +1,36 @@
+class Solution {
+public:
+    //记忆化搜索
+    typedef vector<int> vi;
+    #define rep(i,a,b) for(int i=a;i<=b;i++)
+    int n,m;
+
+    int dfs(int x,int y,vector<vi>& dp,vector<vi>& mat,int& res){
+        if(dp[x][y])return dp[x][y];
+        int ans=1;
+        static const int dx[]={0,0,-1,1};
+        static const int dy[]={1,-1,0,0};
+        rep(i,0,3){
+            int nx=x+dx[i];
+            int ny=y+dy[i];
+            if(nx<0||nx>=n||ny<0||ny>=m)continue;
+            if(mat[x][y]>mat[nx][ny])
+                ans=max(ans,dfs(nx,ny,dp,mat,res)+1);
+        }
+        res=max(res,ans);
+        dp[x][y]=ans;
+        //cout<<x<<" "<<y<<" "<<ans<<endl;
+        return ans;
+    }
+    
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        if(matrix.empty())return 0;
+        n=matrix.size(),m=matrix[0].size();
+        vector<vi> dp(n,vi(m,0));
+        int res=0;
+        rep(i,0,n-1)
+            rep(j,0,m-1)
+                dfs(i,j,dp,matrix,res);
+        return res;
+    }
+};
