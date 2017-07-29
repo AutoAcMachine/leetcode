@@ -1,0 +1,13 @@
+class Solution {
+public:
+    //", , , ,        a, eaefa"
+    //答案是6，exm?
+    int countSegments(string s) {
+        bool flag=0;int res=0;
+        s.push_back(' ');
+        for(int i=0;i<s.length();i++)
+            if(s[i]==' '&&i>0&&s[i-1]!=' ')
+                res++;
+        return res;
+    }
+};
