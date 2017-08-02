@@ -1,0 +1,55 @@
+class LRUCache {
+private:
+    #define x first
+    #define y second
+    typedef list<int> li;
+    typedef pair<int,li::iterator> pii;
+    typedef map<int,pii> mip;
+    int cap;
+    li use;
+    mip cache;
+    
+    void touch(mip::iterator it){
+        int key=it->x;
+        use.erase(it->y.y);
+        use.push_front(key);
+        it->y.y=use.begin();
+    }
+    
+public:
+    LRUCache(int capacity) :cap(capacity){}
+    
+    int get(int key) {
+        auto it=cache.find(key);
+        if(it!=cache.end()){
+            touch(it);
+            return it->y.x;
+        }
+        else
+            return -1;
+    }
+    
+    void put(int key, int value) {
+        auto it=cache.find(key);
+        
+        if(it!=cache.end()){
+            touch(it);   
+            it->y.x=value;
+        }
+        else{
+            if(use.size()==cap){
+                cache.erase(use.back());
+                use.pop_back();
+            }
+            use.push_front(key);
+            cache.insert({key,{value,use.begin()}});
+        }
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
