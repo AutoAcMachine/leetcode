@@ -1,0 +1,19 @@
+class Solution {
+public:
+    //最直观的统计每一位1出现的次数
+    //不过可以利用利用模拟%3运算
+    //以此来减小常数
+    int singleNumber(vector<int>& nums) {
+        
+        int odd=0,even=0;
+        
+        for(auto val:nums){
+            even|=odd&val;
+            odd^=val;
+            int p=~(odd&even);
+            odd&=p;
+            even&=p;     
+        }
+        return odd;
+    }
+};
