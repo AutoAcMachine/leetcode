@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int sqr(int v){return v*v;}
+    
+    bool judgeSquareSum(int c) {
+        int l=0,r=sqrt(c);
+        while(l<=r){
+            int cur=sqr(l)+sqr(r);
+            if(cur==c)return true;
+            if(cur<c)l++;
+            else r--;
+        }
+        return false;
+    }
+};
