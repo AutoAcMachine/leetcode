@@ -1,0 +1,53 @@
+class NumArray {
+public:
+    NumArray(vector<int> nums) {
+        num=nums;
+        n=nums.size();
+        res.resize(n+1,0);
+        init();
+    }
+    
+    int lowbit(int x){return x&(-x);}
+    
+    void _update(int pos,int val){
+        while(pos<=n){
+            res[pos]+=val;
+            pos+=lowbit(pos);
+        }    
+    }
+    
+    int _get(int pos){
+        int sum=0;
+        while(pos>0){
+            sum+=res[pos];
+            pos-=lowbit(pos);
+        }
+        return sum;
+    }
+    
+    void init(){
+        for(int i=0;i<n;i++)
+            _update(i+1,num[i]);
+        
+    }
+    
+    void update(int i, int val) {
+        _update(i+1,val-num[i]);
+        num[i]=val;
+    }
+    
+    int sumRange(int i, int j) {
+        return _get(j+1)-_get(i);
+    }
+    
+private:
+    vector<int> res,num;
+    int n;
+};
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * obj.update(i,val);
+ * int param_2 = obj.sumRange(i,j);
+ */
