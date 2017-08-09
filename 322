@@ -1,0 +1,11 @@
+class Solution {
+public:
+    string reverseString(string s) {
+        auto l=s.begin(),r=s.end()-1;
+        while(l<r){
+            swap(*l,*r);
+            ++l;--r;
+        }
+        return s;
+    }
+};
