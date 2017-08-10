@@ -1,0 +1,32 @@
+
+class Solution {
+public:
+    int res;
+    vector<int> f;
+    
+    int find(int x){
+        return f[x]==x?x:f[x]=find(f[x]);
+    }
+    
+    void uion(int x,int y){
+        int fx=find(x);
+        int fy=find(y);
+        if(fx!=fy){
+            f[fx]=fy;
+            --res;
+        }
+    }
+    
+    int findCircleNum(vector<vector<int>>& M) {
+        res=M.size();
+        f.resize(res);
+        for(int i=0;i<res;i++)f[i]=i;
+        int n=M.size();
+        for(int i=0;i<n;i++)for(int j=0;j<n;j++)
+            if(M[i][j])
+                uion(i,j);
+        
+        
+        return res;
+    }
+};
