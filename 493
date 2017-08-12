@@ -1,0 +1,43 @@
+public class Solution {  
+    public int reversePairs(int[] nums) {  
+        int[] copy = Arrays.copyOf(nums, nums.length);  
+        int[] bit = new int[nums.length + 1];  
+        Arrays.sort(copy);  
+        int res = 0;  
+        for (int num : nums) {  
+            res += search(bit, index(copy, 2L * num + 1));  
+            insert(bit, index(copy, num));  
+        }  
+        return res;  
+    }  
+    // 找比当前值大的，要往后找  
+    private int search(int[] bit, int i) {  
+        int sum = 0;  
+        while (i < bit.length) {  
+            sum += bit[i];  
+            i += (i & -i);  
+        }  
+        return sum;  
+    }  
+    // 更新所有小于等于位置i的值所在的bit  
+    private void insert(int[] bit, int i) {  
+        while (i > 0) {  
+            bit[i]++;  
+            i -= (i & -i);  
+        }  
+    }  
+    private int index(int[] nums, long val) {  
+        int i = 0;  
+        int j = nums.length - 1;  
+        while (i <= j) {  
+            int mid = i + (j - i) / 2;  
+            if (nums[mid] >= val) {  
+                j = mid - 1;  
+            } else {  
+                i = mid + 1;  
+            }  
+        }  
+        // 返回bit内的index，要加一  
+        return i + 1;  
+    }  
+}  
