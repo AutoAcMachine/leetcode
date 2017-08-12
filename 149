@@ -1,0 +1,39 @@
+/**
+ * Definition for a point.
+ * struct Point {
+ *     int x;
+ *     int y;
+ *     Point() : x(0), y(0) {}
+ *     Point(int a, int b) : x(a), y(b) {}
+ * };
+ */
+class Solution {
+public:
+    typedef pair<int,int> pr;
+    #define mp make_pair
+    int maxPoints(vector<Point>& points) {
+        if(points.size()<2)return points.size();
+        int res=2;
+        int n=points.size();
+        for(int i=0;i<n;++i){
+            map<pr,int> vis;   
+            int cnt=0;
+            for(int j=0;j<n;++j){
+                if(i==j)continue;
+                if(points[i].x==points[j].x&&points[i].y==points[j].y){
+                    ++cnt;continue;
+                }
+                int a=points[i].x-points[j].x;
+                int b=points[i].y-points[j].y;
+                int p=__gcd(a,b);
+                if(p!=0)
+                    a/=p,b/=p;
+                ++vis[mp(a,b)];
+            }
+            for(auto val:vis)
+                res=max(res,val.second+cnt+1);
+            res=max(res,cnt+1);
+        }
+        return res;
+    }
+};
