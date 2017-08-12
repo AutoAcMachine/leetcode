@@ -1,32 +1,27 @@
-class Solution {
-public:
-    //矩阵内小于等于k的最大子矩阵和
-    //考虑一维的话，只要对于每个结束点，二分一下就好
-    //复杂度O(n^2*m*log(m))
-    int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
-        
-        if(matrix.empty())return 0;
-        
-        int res=INT_MIN;
-        int n=matrix.size(),m=matrix[0].size();
-        
-        for(int i=0;i<n;i++){
-            vector<int> sum(m,0);
-            for(int j=i;j<n;j++){
-                for(int k=0;k<m;k++)   
-                    sum[k]+=matrix[j][k];
-                set<int> s;
-                int cnt=0,_res=INT_MIN;
-                s.insert(0);
-                for(auto val:sum){
-                    cnt+=val;
-                    auto it=s.lower_bound(cnt-k);
-                    if(it!=s.end())_res=max(_res,cnt-(*it));
-                    s.insert(cnt);
-                }
-                res=max(res,_res);
-            }
-        }
-        return res;
-    }
-};
+class Solution {  
+public:  
+    int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {  
+        if(matrix.size()==0) return 0;  
+        int row = matrix.size(), col = matrix[0].size();  
+        int ans =INT_MIN;  
+        for(int i = 0; i < col; i++)  
+        {  
+            vector<int> sum(row, 0);  
+            for(int j =i; j < col; j++)  
+            {  
+                set<int> st{0};  
+                int curSum =0, curMax = INT_MIN;  
+                for(int x = 0; x < row; x++)  
+                {  
+                    sum[x] += matrix[x][j];  
+                    curSum += sum[x];  
+                    auto it = st.lower_bound(curSum-k);  
+                    if(it!=st.end()) curMax = max(curSum - *it, curMax);  
+                    st.insert(curSum);  
+                }  
+                ans = max(curMax, ans);  
+            }  
+        }  
+        return ans;  
+    }  
+}; 
