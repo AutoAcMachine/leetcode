@@ -1,0 +1,15 @@
+class Solution {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        unordered_set<int> s;
+        int cnt=0,pre=0;
+        for(auto v:nums){
+            cnt+=v;
+            if(k)cnt%=k;
+            if(s.find(cnt)!=s.end())return true;
+            s.insert(pre);
+            pre=cnt;
+        }
+        return false;
+    }
+};
