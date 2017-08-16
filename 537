@@ -1,0 +1,13 @@
+class Solution {
+public:
+    void solve(string& s,int& a,int &b){
+        char c;stringstream in(s);
+        in>>a;in>>c;in>>b;
+    }
+    string complexNumberMultiply(string s1, string s2) {
+        int a,b,c,d;
+        solve(s1,a,b);
+        solve(s2,c,d);
+        return to_string(a*c-b*d)+"+"+to_string(a*d+b*c)+"i";
+    }
+};
